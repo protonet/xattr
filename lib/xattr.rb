@@ -10,7 +10,11 @@ class Xattr
   
   # Raw access to *xattr() functions.
   module Raw # :nodoc:
-    extend DL::Importable    
+    if RUBY_VERSION > '1.9'
+      extend DL::Importer    
+    else
+      extend DL::Importable
+    end   
     # Don't follow symbolic links
     NOFOLLOW = 0x0001
     # set the value, fail if attr already exists
